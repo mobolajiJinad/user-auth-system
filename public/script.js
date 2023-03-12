@@ -2,16 +2,20 @@ const passwordInput = document.getElementById("password");
 const showPasswordCheckbox = document.getElementById("show-password-checkbox");
 const flashMessages = document.querySelectorAll(".flash-message");
 
-showPasswordCheckbox.addEventListener("change", () => {
-  if (showPasswordCheckbox.checked) {
-    passwordInput.type = "text";
-  } else {
-    passwordInput.type = "password";
-  }
-});
+try {
+  showPasswordCheckbox.addEventListener("change", () => {
+    if (showPasswordCheckbox.checked) {
+      passwordInput.type = "text";
+    } else {
+      passwordInput.type = "password";
+    }
+  });
+} catch (err) {
+  console.log(err);
+}
 
 flashMessages.forEach((flashMessage) => {
   setTimeout(() => {
     flashMessage.remove();
-  }, 3000);
+  }, 1500);
 });

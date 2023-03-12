@@ -1,7 +1,7 @@
 module.exports = function isAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
-    req.flash("error", "You are not logged in.");
     return next();
   }
+  req.flash("error", "You are not logged in.");
   res.redirect("/login");
 };

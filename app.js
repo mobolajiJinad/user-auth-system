@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const morgan = require("morgan");
 const passport = require("passport");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
@@ -8,6 +9,7 @@ const flash = require("connect-flash");
 require("dotenv").config({ path: "./config/config.env" });
 
 require("./config/passport");
+require("./models/User");
 const routes = require("./routes/routes");
 const flashMiddleware = require("./middlewares/flashMiddleware");
 
@@ -15,6 +17,7 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(morgan("dev"));
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 app.use(express.static(path.join(__dirname, "public")));

@@ -12,12 +12,10 @@ html(lang="en")
     if messages.error
       .flash-message.error
         p= messages.error
-        button.close-button(type="button") &times;
         
     if messages.success
       .flash-message.success
         p= messages.success
-        button.close-button(type="button") &times;
 
     block main
 

@@ -14,7 +14,7 @@ router
   .get((req, res) => {
     res.render("login", {
       title: "Log in page",
-      msg: req.flash("error"),
+      msg: { error: req.flash("error") },
     });
   })
   .post((req, res, next) => {
@@ -59,7 +59,8 @@ router
       }
 
       // Add password validation
-      const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+      const passwordRegex =
+        /^(?=.*\d)(?=.*[!@_#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,16}$/;
       if (!passwordRegex.test(password)) {
         req.flash(
           "error",
@@ -80,7 +81,7 @@ router
 
 router.get("/dashboard", isAuthenticated, (req, res) => {
   res.render("dashboard", {
-    title: dashboard,
+    title: "dashboard",
   });
 });
 module.exports = router;
