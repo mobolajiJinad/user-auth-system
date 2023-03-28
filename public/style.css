@@ -8,7 +8,9 @@ body {
 }
 
 .container {
+  margin: 0.5rem 1rem;
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -22,7 +24,7 @@ h1 {
   text-align: center;
 }
 
-form {
+.form {
   background-color: #fff;
   padding: 20px;
   border-radius: 10px;

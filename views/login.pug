@@ -3,7 +3,7 @@ extends layout
 block main
   h1 Log in
   
-  form(action="/login", method="post") 
+  form.form(action="/auth/local/login", method="post") 
     label(for="username") Username: 
     input#username(type="text", name="username", required) 
     label(for="password") Password: 
@@ -13,4 +13,4 @@ block main
       label(for="show-password-checkbox") Show password 
     input.btn.login(type="submit", value="Log in")
 
-  a.btn.signup(href="/signup") Don't have an account? Sign up 
+  a.btn.signup(href="/auth/signup") Don't have an account? Sign up 

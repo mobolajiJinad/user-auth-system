@@ -1,10 +1,11 @@
 const passport = require("passport");
-const Strategy = require("passport-local").Strategy;
+const LocalStrategy = require("passport-local").Strategy;
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
 
 const User = require("../models/User");
 
 passport.use(
-  new Strategy(async (username, password, done) => {
+  new LocalStrategy(async (username, password, done) => {
     try {
       const user = await User.findOne({ username });
 
@@ -25,6 +26,31 @@ passport.use(
   })
 );
 
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: "/auth/google/callback",
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        let user = await User.findOne({ _id: profile.id });
+        if (!user) {
+          user = await User.create({
+            _id: profile.id,
+            username: profile.displayName,
+            email: profile.emails[0].value,
+          });
+        }
+        done(null, user);
+      } catch (err) {
+        done(err);
+      }
+    }
+  )
+);
+
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
@@ -33,7 +59,9 @@ passport.deserializeUser(async (id, done) => {
   try {
     const user = await User.findById(id);
 
-    done(null, user);
+    if (user) {
+      done(null, user);
+    }
   } catch (err) {
     done(err);
   }

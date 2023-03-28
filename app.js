@@ -6,11 +6,18 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const path = require("path");
 const flash = require("connect-flash");
+
 require("dotenv").config({ path: "./config/config.env" });
 
 require("./config/passport");
 require("./models/User");
-const routes = require("./routes/routes");
+
+const authRoutes = require("./routes/authRoutes");
+const otherRoutes = require("./routes/otherRoutes");
+const {
+  isAuthenticated,
+  isGuest,
+} = require("./middlewares/authenticationMiddleware");
 const flashMiddleware = require("./middlewares/flashMiddleware");
 
 const app = express();
@@ -27,7 +34,7 @@ app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
     cookie: {
       maxAge: 7 * 24 * 60 * 60 * 1000, // Seven days
@@ -47,7 +54,12 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/", routes);
+app.get("/", (req, res) => {
+  res.redirect("/dashboard");
+});
+
+app.use("/auth", isGuest, authRoutes);
+app.use("/dashboard", isAuthenticated, otherRoutes);
 
 const port = process.env.PORT || 3000;
 

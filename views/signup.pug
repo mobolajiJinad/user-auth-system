@@ -3,7 +3,7 @@ extends layout
 block main 
   h1 Sign Up
 
-  form(action="/signup", method="post") 
+  form.form(action="/auth/signup", method="post") 
     label(for="username") Username: 
     input#username(type="text", name="username", required) 
 
@@ -23,14 +23,19 @@ block main
 
     input.btn.login(type="submit", value="Sign Up")
 
-    script. 
-      const confirmPasswordInput = document.getElementById("confirm-password");
-      const showConfirmPasswordCheckbox = document.getElementById("show-confirm-password-checkbox");
+  h1 OR 
 
-      showConfirmPasswordCheckbox.addEventListener("change", () => {
-        if (showConfirmPasswordCheckbox.checked) {
-          confirmPasswordInput.type = "text";
-        } else {
-          confirmPasswordInput.type = "password";
-        }
-      });
+  .form 
+    a.btn.signup(href="/auth/google") Signup Using Google
+
+  script. 
+    const confirmPasswordInput = document.getElementById("confirm-password");
+    const showConfirmPasswordCheckbox = document.getElementById("show-confirm-password-checkbox");
+
+    showConfirmPasswordCheckbox.addEventListener("change", () => {
+      if (showConfirmPasswordCheckbox.checked) {
+        confirmPasswordInput.type = "text";
+      } else {
+        confirmPasswordInput.type = "password";
+      }
+    });
