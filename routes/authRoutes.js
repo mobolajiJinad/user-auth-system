@@ -25,9 +25,10 @@ router
   })
   .post(login);
 
-router.route("/google").get(
+router.get(
+  "/google",
   passport.authenticate("google", {
-    scope: ["profile", "email"],
+    scope: ["profile"],
   })
 );
 

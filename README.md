@@ -11,7 +11,7 @@ Implementation of different types of authentication that can used in an app.
 
 1. Start the server using `npm start`
 
-Use `npm install to install all packages` and `npm start` to start the app.
+Use `npm install` to install all packages and `npm start` to start the app.
 
 ## Contributing
 

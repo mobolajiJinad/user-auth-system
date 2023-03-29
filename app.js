@@ -9,7 +9,7 @@ const flash = require("connect-flash");
 
 require("dotenv").config({ path: "./config/config.env" });
 
-require("./config/passport");
+require("./config/passport")(passport);
 require("./models/User");
 
 const authRoutes = require("./routes/authRoutes");
@@ -33,7 +33,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
-    resave: false,
+    resave: true,
     saveUninitialized: false,
     store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
     cookie: {
