@@ -1,7 +1,6 @@
 const express = require("express");
 const passport = require("passport");
 const { signup, login } = require("../controllers/local-auth");
-const { callbackCtrl } = require("../controllers/google-auth");
 
 const router = express.Router();
 
@@ -35,9 +34,33 @@ router.get(
 router.get(
   "/google/callback",
   passport.authenticate("google", {
-    failureFlash: "Failed to sign up with google",
+    failureFlash: "Failed to continue with google",
   }),
-  callbackCtrl
+  (err, req, res, next) => {
+    if (err) {
+      req.flash("error", "Sign up failed");
+      return res.redirect("/auth/signup");
+    }
+
+    res.redirect("/dashboard");
+  }
+);
+
+router.get("/facebook", passport.authenticate("facebook"));
+
+router.get(
+  "/auth/facebook/callback",
+  passport.authenticate("facebook", {
+    failureFlash: "Failed to continue with facebook",
+  }),
+  (err, req, res, next) => {
+    if (err) {
+      req.flash("error", "Sign up failed");
+      return res.redirect("/auth/signup");
+    }
+
+    res.redirect("/dashboard");
+  }
 );
 
 module.exports = router;
