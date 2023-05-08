@@ -49,7 +49,7 @@ router.get(
 router.get("/facebook", passport.authenticate("facebook"));
 
 router.get(
-  "/auth/facebook/callback",
+  "/facebook/callback",
   passport.authenticate("facebook", {
     failureFlash: "Failed to continue with facebook",
   }),
