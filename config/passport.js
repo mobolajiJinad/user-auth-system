@@ -64,7 +64,8 @@ module.exports = function (passport) {
       {
         clientID: process.env.FACEBOOK_APP_ID,
         clientSecret: process.env.FACEBOOK_APP_SECRET,
-        callbackURL: "/auth/facebook/callback",
+        callbackURL:
+          "https://squady-user-auth-system.vercel.app/auth/facebook/callback",
         profileFields: ["id", "displayName", "email"],
       },
       async (accessToken, refreshToken, profile, done) => {
