@@ -32,8 +32,7 @@ module.exports = function (passport) {
       {
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL:
-          "https://squady-user-auth-system.vercel.app/auth/google/callback",
+        callbackURL: "/auth/google/callback",
       },
       async (accessToken, refreshToken, profile, done) => {
         try {
@@ -65,8 +64,7 @@ module.exports = function (passport) {
       {
         clientID: process.env.FACEBOOK_APP_ID,
         clientSecret: process.env.FACEBOOK_APP_SECRET,
-        callbackURL:
-          "https://squady-user-auth-system.vercel.app/auth/facebook/callback",
+        callbackURL: "/auth/facebook/callback",
         profileFields: ["id", "displayName", "email"],
       },
       async (accessToken, refreshToken, profile, done) => {

@@ -23,6 +23,7 @@
     "passport-facebook": "^3.0.0",
     "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0",
+    "passport-twitter": "^0.1.5",
     "pug": "^3.0.2"
   }
 }
