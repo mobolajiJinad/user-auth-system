@@ -1,34 +1,36 @@
 extends layout
 
 block main 
-  h1 Sign Up
+  .form_container  
+    h1 Sign Up
 
-  form.form(action="/auth/signup", method="post") 
-    label(for="username") Username: 
-    input#username(type="text", name="username", required) 
+    form.form(action="/auth/signup", method="post") 
+      label(for="username") Username: 
+      input#username(type="text", name="username", required) 
 
-    label(for="password") Password: 
-    input#password(type="password", name="password", required)
+      label(for="password") Password: 
+      input#password(type="password", name="password", required)
 
-    .show-password 
-      input#show-password-checkbox(type="checkbox", name="")
-      label(for="show-password-checkbox") Show password 
+      .show-password 
+        input#show-password-checkbox(type="checkbox", name="")
+        label(for="show-password-checkbox") Show password 
 
-    label(for="confirm-password") Confirm Password:
-    input#confirm-password(type="password", name="confirmPassword", required)
+      label(for="confirm-password") Confirm Password:
+      input#confirm-password(type="password", name="confirmPassword", required)
 
-    .show-password 
-      input#show-confirm-password-checkbox(type="checkbox", name="")
-      label(for="show-confirm-password-checkbox") Show password
+      .show-password 
+        input#show-confirm-password-checkbox(type="checkbox", name="")
+        label(for="show-confirm-password-checkbox") Show password
 
-    input.btn.login(type="submit", value="Sign Up")
+      input.btn.login(type="submit", value="Sign Up")
 
-  h1 OR 
+  .form_container  
+    h1 OR 
 
-  .form 
-    a.btn.signup(href="/auth/google") Continue with Google
-    a.btn.signup(href="/auth/facebook") Continue with Facebook
-    a.btn.signup(href="/auth/twitter") Continue with Twitter
+    .form 
+      a.btn.signup(href="/auth/google") Continue with Google
+      a.btn.signup(href="/auth/facebook") Continue with Facebook
+      a.btn.signup(href="/auth/twitter") Continue with Twitter
 
   script. 
     const confirmPasswordInput = document.getElementById("confirm-password");
