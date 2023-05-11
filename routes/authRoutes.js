@@ -64,7 +64,8 @@ router.get(
 );
 
 router.get("/twitter", (req, res) => {
-  return req.flash("error", "Feature not yet implemented");
+  req.flash("error", "Feature not yet implemented");
+  res.redirect("/auth/signup");
 });
 
 module.exports = router;

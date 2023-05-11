@@ -19,6 +19,7 @@ const {
   isGuest,
 } = require("./middlewares/authenticationMiddleware");
 const flashMiddleware = require("./middlewares/flashMiddleware");
+const enforceHttps = require("./middlewares/enforeceHTTPS");
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use(morgan("dev"));
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 app.use(express.static(path.join(__dirname, "public")));
+app.use(enforceHttps);
 
 // Sessions
 app.use(
