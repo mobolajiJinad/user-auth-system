@@ -44,11 +44,11 @@ module.exports = function (passport) {
             delete email;
           }
 
-          let user = await User.findById(profile.id);
+          let user = await User.findOne({ userID: profile.id });
 
           if (!user) {
             user = await User.create({
-              _id: profile.id,
+              userID: profile.id,
               username: profile.displayName,
               ...(email && { email }),
             });
@@ -78,11 +78,11 @@ module.exports = function (passport) {
             delete email;
           }
 
-          let user = await User.findById(profile.id);
+          let user = await User.findOne({ userID: profile.id });
 
           if (!user) {
             user = await User.create({
-              _id: profile.id,
+              userID: profile.id,
               username: profile.displayName,
               ...(email && { email }),
             });
@@ -111,11 +111,11 @@ module.exports = function (passport) {
             delete email;
           }
 
-          const user = User.findById(profile.id);
+          let user = await User.findOne({ userID: profile.id });
 
           if (!user) {
             user = await User.create({
-              _id: profile.id,
+              userID: profile.id,
               username: profile.displayName,
               ...(email && { email }),
             });
