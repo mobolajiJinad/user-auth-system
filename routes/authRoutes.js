@@ -35,13 +35,9 @@ router.get(
   "/google/callback",
   passport.authenticate("google", {
     failureFlash: "Failed to continue with google",
+    failureRedirect: "/auth/signup",
   }),
-  (err, req, res, next) => {
-    if (err) {
-      req.flash("error", "Sign up failed");
-      return res.redirect("/auth/signup");
-    }
-
+  (req, res) => {
     res.redirect("/dashboard");
   }
 );
@@ -52,20 +48,24 @@ router.get(
   "/facebook/callback",
   passport.authenticate("facebook", {
     failureFlash: "Failed to continue with facebook",
+    failureRedirect: "/auth/signup",
   }),
-  (err, req, res, next) => {
-    if (err) {
-      req.flash("error", "Sign up failed");
-      return res.redirect("/auth/signup");
-    }
-
+  (req, res) => {
     res.redirect("/dashboard");
   }
 );
 
-router.get("/twitter", (req, res) => {
-  req.flash("error", "Feature not yet implemented");
-  res.redirect("/auth/signup");
-});
+router.get("/twitter", passport.authenticate("twitter"));
+
+router.get(
+  "/twitter/callback",
+  passport.authenticate("twitter", {
+    failureFlash: "Failed to continue with twitter",
+    failureRedirect: "/auth/signup",
+  }),
+  (req, res) => {
+    res.redirect("/dashboard");
+  }
+);
 
 module.exports = router;
