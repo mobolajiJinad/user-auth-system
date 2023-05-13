@@ -3,7 +3,7 @@ const passport = require("passport");
 const User = require("../models/User");
 
 const login = () => {
-  passport.authenticate("local", {
+  return passport.authenticate("local", {
     failureFlash: "You do not have an account",
     failureRedirect: "/auth/signup",
     successRedirect: "/dashboard",
@@ -42,7 +42,8 @@ const signup = async (req, res, next) => {
     req.flash("success", "You have successfully signed up!");
     res.redirect("/dashboard");
   } catch (err) {
-    console.log(err);
+    req.flash("error", "An error occured, try again later");
+    return res.redirect("/auth/signup");
   }
 };
 
