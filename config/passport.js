@@ -98,8 +98,8 @@ module.exports = function (passport) {
   passport.use(
     new TwitterStrategy(
       {
-        consumerKey: process.env.TWITTER_CLIENT_ID,
-        consumerSecret: process.env.TWITTER_CLIENT_SECRET,
+        consumerKey: process.env.TWITTER_CONSUMER_KEY,
+        consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
         callbackURL:
           "https://squady-user-auth-system.vercel.app/auth/twitter/callback",
       },
