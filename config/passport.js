@@ -44,11 +44,11 @@ module.exports = function (passport) {
             delete email;
           }
 
-          let user = await User.findOne({ googleID: profile.id });
+          let user = await User.findById(profile.id);
 
           if (!user) {
             user = await User.create({
-              googleID: profile.id,
+              _id: profile.id,
               username: profile.displayName,
               ...(email && { email }),
             });
@@ -78,11 +78,11 @@ module.exports = function (passport) {
             delete email;
           }
 
-          let user = await User.findOne({ facebookID: profile.id });
+          let user = await User.findById(profile.id);
 
           if (!user) {
             user = await User.create({
-              facebookID: profile.id,
+              _id: profile.id,
               username: profile.displayName,
               ...(email && { email }),
             });
@@ -99,7 +99,7 @@ module.exports = function (passport) {
     new TwitterStrategy(
       {
         consumerKey: process.env.TWITTER_CLIENT_ID,
-        consumerSecret: process.env.TWITTER_CLIENT_ID,
+        consumerSecret: process.env.TWITTER_CLIENT_SECRET,
         callbackURL:
           "https://squady-user-auth-system.vercel.app/auth/twitter/callback",
       },
@@ -114,7 +114,7 @@ module.exports = function (passport) {
           const user = User.findById(profile.id);
 
           if (!user) {
-            await User.create({
+            user = await User.create({
               _id: profile.id,
               username: profile.displayName,
               ...(email && { email }),
