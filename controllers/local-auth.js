@@ -2,11 +2,13 @@ const passport = require("passport");
 
 const User = require("../models/User");
 
-const login = passport.authenticate("local", {
-  failureFlash: "You do not have an account",
-  failureRedirect: "/auth/signup",
-  successRedirect: "/dashboard",
-});
+const login = () => {
+  passport.authenticate("local", {
+    failureFlash: "You do not have an account",
+    failureRedirect: "/auth/signup",
+    successRedirect: "/dashboard",
+  });
+};
 
 const signup = async (req, res, next) => {
   try {

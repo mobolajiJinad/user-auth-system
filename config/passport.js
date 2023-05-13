@@ -131,10 +131,12 @@ module.exports = function (passport) {
 
   passport.serializeUser((user, done) => {
     done(null, user.id);
+    console.log(user.id);
   });
 
   passport.deserializeUser(async (id, done) => {
     try {
+      console.log(id);
       const user = await User.findById(id);
 
       if (user) {
